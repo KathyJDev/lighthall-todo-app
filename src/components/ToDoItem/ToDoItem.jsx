@@ -25,14 +25,22 @@ const ToDoItem = (props) => {
         const userDoc = userRef.docs[0];
         const userTasks = userDoc.data().tasks;
         const taskIndex = userTasks.findIndex((_, index) => index === props.id);
-
+    
         if (taskIndex !== -1) {
           const task = userTasks[taskIndex];
-          setStatus({
-            title: task.status,
-            background: getStatusBackground(task.status)
-          });
-          setIsChecked(task.status === 'Completed');
+          if (task.status && ["Not Started", "In Progress", "Completed"].includes(task.status)) {
+            setStatus({
+              title: task.status,
+              background: getStatusBackground(task.status)
+            });
+            setIsChecked(task.status === 'Completed');
+          } else {
+            setStatus({
+              title: "Not Started",
+              background: "#ff5252"
+            });
+            setIsChecked(false);
+          }
         }
       } catch (error) {
         console.error(error);
@@ -51,7 +59,7 @@ const ToDoItem = (props) => {
       case 'Completed':
         return 'green';
       default:
-        return '#002950';
+        return '#ff5252'
     }
   };
 
@@ -81,7 +89,7 @@ const ToDoItem = (props) => {
       default:
         setStatus({
           title: "Not Started",
-          background: "#002950"
+          background: "#ff5252"
         });
     };
   };
