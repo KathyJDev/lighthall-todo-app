@@ -9,3 +9,5 @@ This project was made as a submission in the Lighthall Software Engineering Supe
 Link: https://lighthall-todo-app.vercel.app/
 
 Contributers: Matthew Salami & Kathryn Jerez
+
+Built with React and Firebase
